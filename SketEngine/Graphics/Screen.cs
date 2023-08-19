@@ -9,7 +9,7 @@ namespace Sket.Graphics
 		private readonly static int MinDimension = 64;
 		private readonly static int MaxDimension = 4096;
 
-		private Boolean isDisposed;
+		private bool isDisposed;
 		private Game game;
 		private RenderTarget2D target;
 		private bool isSet;

@@ -9,7 +9,7 @@ namespace Sket.Graphics
 		public readonly static float MinZ = 1f;
 		public readonly static float MaxZ = 2048f;
 
-		public readonly static float MinZoom = 1f;
+		public readonly static float MinZoom = 2f / 3f;
 		public readonly static float MaxZoom = 2f;
 		public readonly static float ZoomAmount = 1.0f / 3.0f;
 		

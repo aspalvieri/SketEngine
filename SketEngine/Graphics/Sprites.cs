@@ -42,7 +42,7 @@ namespace Sket.Graphics
             isDisposed = true;
         }
 
-        public void Begin(Camera camera, bool isTextureFilteringEnabled)
+        public void Begin(Camera camera, bool isTextureFilteringEnabled = false)
         {
             SamplerState sampler = SamplerState.PointClamp;
             if (isTextureFilteringEnabled)
@@ -76,13 +76,31 @@ namespace Sket.Graphics
 		{
 			sprites.Draw(texture, position, sourceRectangle, color, rotation, origin, scale, SpriteEffects.None, 0f);
 		}
-        public void Draw(Texture2D texture, Rectangle? sourceRectangle, Rectangle destinationRectangle, Color color)
+		public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRectangle, float rotation, Vector2 origin, float scale, Color color)
+		{
+			sprites.Draw(texture, position, sourceRectangle, color, rotation, origin, scale, SpriteEffects.None, 0f);
+		}
+		public void Draw(Texture2D texture, Rectangle? sourceRectangle, Rectangle destinationRectangle, Color color)
         {
             sprites.Draw(texture, destinationRectangle, sourceRectangle, color, 0f, Vector2.Zero, SpriteEffects.None, 0f);
         }
 		public void Draw(Texture2D texture, Rectangle? sourceRectangle, Rectangle destinationRectangle, float rotation, Vector2 origin, Color color)
 		{
 			sprites.Draw(texture, destinationRectangle, sourceRectangle, color, rotation, origin, SpriteEffects.None, 0f);
+		}
+
+		public void DrawString(SpriteFont spriteFont, string text, Vector2 position, Color color)
+		{
+			//SpriteFont, Text, Position, Color, Rotation, Origin, Scale, SpriteEffects, LayerDepth
+			sprites.DrawString(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+		}
+		public void DrawString(SpriteFont spriteFont, string text, Vector2 position, float rotation, Vector2 origin, float scale, Color color)
+        {
+            sprites.DrawString(spriteFont, text, position, color, rotation, origin, scale, SpriteEffects.None, 0f);
+        }
+		public void DrawString(SpriteFont spriteFont, string text, Vector2 position, float rotation, Vector2 origin, Vector2 scale, Color color)
+		{
+			sprites.DrawString(spriteFont, text, position, color, rotation, origin, scale, SpriteEffects.None, 0f);
 		}
 	}
 }
