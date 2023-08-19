@@ -5,7 +5,7 @@ using System;
 
 namespace Sket.Graphics
 {
-	public sealed class Shapes : IDisposable
+	public sealed class ShapeRenderer : IDisposable
 	{
 		public static readonly float MinLineThickness = 1f;
 		public static readonly float MaxLineThickness = 10f;
@@ -22,7 +22,7 @@ namespace Sket.Graphics
 		private bool isStarted;
 		private bool isDisposed;
 
-		public Shapes(Game game)
+		public ShapeRenderer(Game game)
 		{
 			if (game is null)
 				throw new ArgumentNullException("game");

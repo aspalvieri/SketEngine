@@ -1,19 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Sket.Graphics
 {
-    public sealed class Sprites : IDisposable
+    public sealed class SpriteRenderer : IDisposable
     {
         private bool isDisposed;
         private Game game;
         private SpriteBatch sprites;
         private BasicEffect effect;
 
-        public Sprites(Game game)
+        public SpriteRenderer(Game game)
         {
             if (game is null)
                 throw new ArgumentNullException("game");

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sket.Graphics;
+using System;
 
 namespace Sket
 {
@@ -11,34 +12,43 @@ namespace Sket
         public Vector2 origin;
         public float rotation = 0f;
         public float scale = 1f;
+        public float alpha = 1f;
         public SpriteEffects spriteEffect;
 
-        protected Texture2D texture;
+		protected int width = 0;
+		protected int height = 0;
+        protected Vector2 center;
+
+		protected Texture2D texture;
         protected Rectangle[] rectangles;
         protected int frameIndex = 0;
 
         public SpriteManager(Texture2D texture, int frames)
         {
             this.texture = texture;
-            int width = texture.Width / frames;
+            int textureWidth = texture.Width / frames;
             rectangles = new Rectangle[frames];
 
             for (int i = 0; i < frames; i++)
-                rectangles[i] = new Rectangle(i * width, 0, width, texture.Height);
+                rectangles[i] = new Rectangle(i * textureWidth, 0, textureWidth, texture.Height);
+
+            center = new Vector2(width / 2.0f, height / 2.0f);
         }
 
-        public void Draw(Sprites spriteBatch, Camera camera = null)
+        public void Draw(SpriteRenderer spriteBatch, Camera camera = null)
         {
             if (camera is null) {
-                spriteBatch.Draw(texture, position, rectangles[frameIndex], rotation, origin, scale, color);
-            }
+				spriteBatch.Draw(texture, rectangles[frameIndex],
+					new Rectangle((int)position.X, (int)position.Y, width, height), rotation, origin, color * alpha);
+			}
             else {
-                spriteBatch.Draw(texture, new Vector2(position.X - camera.Position.X, position.Y - camera.Position.Y), rectangles[frameIndex], rotation, origin, scale, color);
+                spriteBatch.Draw(texture, rectangles[frameIndex],
+                    new Rectangle((int)(position.X - camera.Position.X), (int)(position.Y - camera.Position.Y), width, height), rotation, origin, color * alpha);
             }
 		}
     }
 
-    public class SpriteAnimation : SpriteManager
+    public class Sprite : SpriteManager
     {
         public bool isLooping;
 
@@ -50,7 +60,7 @@ namespace Sket
             set { timeToUpdate = (1f / value); } 
         }
 
-        public SpriteAnimation(Texture2D texture, int frames, int fps, bool isLooping = true) : base(texture, frames) 
+        public Sprite(Texture2D texture, int frames, int fps, bool isLooping = true) : base(texture, frames) 
         {
             FramesPerSecond = fps;
             this.isLooping = isLooping;
@@ -70,9 +80,16 @@ namespace Sket
             }
         }
 
-        public void setFrame(int frame)
+        public void SetFrame(int frame)
         {
             frameIndex = frame;
         }
-    }
+
+		public Sprite SetSize(int width, int height)
+		{
+			this.width = width;
+			this.height = height;
+			return this;
+		}
+	}
 }

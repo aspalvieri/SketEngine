@@ -62,7 +62,7 @@ namespace Sket.Graphics
 			isSet = false;
 		}
 
-		public void Present(Sprites sprites, bool textureFiltering = true)
+		public void Present(SpriteRenderer sprites, bool textureFiltering = true)
 		{
 			if (sprites is null)
 				throw new ArgumentNullException("sprites");
