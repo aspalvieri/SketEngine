@@ -89,11 +89,13 @@ namespace Sket.Graphics
 		public void Move(Vector2 amount)
 		{
 			position += amount;
+			position.Round();
 		}
 
 		public void MoveTo(Vector2 position)
 		{
 			this.position = position;
+			this.position.Round();
 		}
 
 		public void IncZoom()
@@ -131,6 +133,16 @@ namespace Sket.Graphics
 			right = left + width;
 			top = position.Y - (height * 0.5f);
 			bottom = top + height;
+		}
+
+		public void GetExtents(out int left, out int right, out int top, out int bottom)
+		{
+			GetExtents(out float width, out float height);
+
+			left = (int)(position.X - (width * 0.5f));
+			right = (int)(left + width);
+			top = (int)(position.Y - (height * 0.5f));
+			bottom = (int)(top + height);
 		}
 
 		public void GetExtents(out Vector2 min, out Vector2 max)

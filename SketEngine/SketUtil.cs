@@ -54,5 +54,17 @@ namespace Sket
 			x *= invLen;
 			y *= invLen;
 		}
+
+		public static bool GetBoolValue(string value)
+		{
+			switch (value.ToLower()) {
+				case "true":
+					return true;
+				case "false":
+					return false;
+				default:
+					throw new Exception("Given value doesn't match a bool value.");
+			}
+		}
 	}
 }
